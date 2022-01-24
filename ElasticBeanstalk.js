@@ -299,12 +299,9 @@ A. Setup Cloud9 environment
         http://54.221.191.133:8080
 
 
-//Step 2: Git Repository
-B. Initialize Git Repository
-
-
-
-
+        
+        
+EOF
 
 
 
