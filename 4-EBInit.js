@@ -9,7 +9,7 @@ D. EB Init
       cd study-sync
       ls -la
 
-3. Enter the following command. Esure to default to "us-east-1" -  US East (N. Virginia)
+3. Enter the following command. Ensure to default to "us-east-1" -  US East (N. Virginia)
       eb init
       
 4. If you think you made a mistake with any of the prompts, run the script again like this
