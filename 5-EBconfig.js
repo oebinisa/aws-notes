@@ -14,9 +14,10 @@ E. EB Config
       touch 002_node_command.config
 
 4. Insert the following into the 001_envar.config file
-      aws:elasticbeanstalk:application:environment:
-        PORT: 8081
-        NODE_ENV: production
+      option_settings:
+        aws:elasticbeanstalk:application:environment:
+          PORT: 8081
+          NODE_ENV: production
         
 5. Edit the next file (002_node_command.config) to tell Elastic Beanstalk how to start up our application
       option_settings:
@@ -25,6 +26,7 @@ E. EB Config
           NodeVersion: 16.13.1 //You can check your node version on the bash shell with "node -v"
 
 6. Commit the configuration on the bash shell
+      cd .. //come back to the project folder
       git add .
       git commit -m "configuration for elastic beanstalk"
 
