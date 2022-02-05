@@ -1,2 +1,2 @@
-# aws-walkthrough
-Notes and sample codes from AWS walkthrough projects
+# aws-notes
+Notes and sample codes from AWS components
