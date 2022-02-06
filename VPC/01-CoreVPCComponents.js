@@ -4,6 +4,7 @@ A. Create VPC
 B. Internet Gateway (IGW)
 C. Route Table
 D. Subnets
+E. EC2 
 
 
 Note:
@@ -49,9 +50,22 @@ C. Route Table (RT)
  
         
 D. Subnets
+1. Subnets are the way to connect our EC2 Instances to the network
+2. AWS would have created default public Subnets - one per AZ (they must have a public IP)
+3. Manually create a Subnet
+      Console => VPC => Left Menu => Subnets => Create Subnet => 
+      Enter Subnet name => Select VPC => Select AZ => Enter your Subnet CIDR
+      
+4. Newly created Subnets are "PRIVATE" by default. To make a subnet "PUBLIC"
+      Select Subnets => Actions => Modify Auto-assign IP Settings => Enable Auto-assign Public IPv4 Address [check]
+      
+5. By default, AWS associates all newly created Subnets with the "Main" RT. 
+   Ensure that your Private Subnets are associated a Private RT - RTs with no entry to the IGW (0.0.0.0/0)
+====================
+
+      
+E. EC2 Instances
 1. 
-
-
 
 
 
