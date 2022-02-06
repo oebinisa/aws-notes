@@ -5,6 +5,9 @@ B. Internet Gateway (IGW)
 C. Route Table
 D. Subnets
 E. EC2 
+      Create EC2
+      IAM Role
+      Security Group (SG)
 
 
 Note:
@@ -77,9 +80,46 @@ E. EC2
                         SSM: AmazonEC2RoleforSSM
                         S3: AmazonS3FullAccess
                   Advanced Details: User Data (Provide or upload startup script - optional)
-
+==================================================
+// The sample startup script below would install an Apache server and display a sample webpage
 // Sample Startup Script - userdata.sh
-c
+--
+su ec2-user
+sudo yum unstall httpd -y
+sudo service httpd start
+sudo su -c 'cat > /var/www/httpd/index.html <<EOL
+<html>
+   <head>
+      <title>Call to Arms</title>
+      <style>
+         html, body { background: #000; padding: 0; margin: 0; }
+         img { display: block; margin: 0px auto; }
+      </style>
+   </head>
+   <body>
+      <img src='https://media.giphy.com/media/10YoCxWqM3NHxK/giphy.gif' height='100%'/>
+   </body>
+</html>     
+==================================================
+            Configure Security Group (SG)
+                  Select existing or create a new Security Group. To create a new SG
+                        Security Group Name: Enter a name
+                        Add Rule: Type - HTTP, Protocol - TCP, Port - 80, Source - My IP (restricts access to only my computer)
+                                  Type - SSH, Protocol - TCP, Port - 22, Source - My IP (restricts access to only my computer)
+            Key Pair: Use existing or generate ne Key Pair
+
+2. Create another Instance for a Private Subnet.
+      Note: Configure Instance Details => Subnet: Ensure to select a Private Subnet
+            Configure Security Group => Add Rule: Only include "SSH" type (No HTTP)
+
+
+
+
+
+
+
+
+
 
 
 
