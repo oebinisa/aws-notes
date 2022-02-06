@@ -53,8 +53,8 @@ D. Subnets
 1. Subnets are the way to connect our EC2 Instances to the network
 2. AWS would have created default public Subnets - one per AZ (they must have a public IP)
 3. Manually create a Subnet
-      Console => VPC => Left Menu => Subnets => Create Subnet => 
-      Enter Subnet name => Select VPC => Select AZ => Enter your Subnet CIDR
+      Console => VPC => Left Menu => Subnets => Create Subnet  
+            Enter Subnet name => Select VPC => Select AZ => Enter your Subnet CIDR
       
 4. Newly created Subnets are "PRIVATE" by default. To make a subnet "PUBLIC"
       Select Subnets => Actions => Modify Auto-assign IP Settings => Enable Auto-assign Public IPv4 Address [check]
@@ -64,9 +64,22 @@ D. Subnets
 ====================
 
       
-E. EC2 Instances
-1. 
+E. EC2 
+1. Create EC2 Instances
+      Console => EC2 => Left Menu => Instances => Launch Instances
+            Chooce AMI: Amazon Linux 2
+            Instance Type: General Purpose - t2.micro
+            Configure Instance Details
+                  Number of Instaces: 1
+                  Network: Select preferred VPC
+                  Subnet: Select a (public) subnet
+                  IAM Role: Your IAM Role should have the following policies (create new Role if required)
+                        SSM: AmazonEC2RoleforSSM
+                        S3: AmazonS3FullAccess
+                  Advanced Details: User Data (Provide or upload startup script - optional)
 
+// Sample Startup Script - userdata.sh
+c
 
 
 
