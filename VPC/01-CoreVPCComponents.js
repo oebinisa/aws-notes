@@ -8,6 +8,9 @@ E. EC2
       Create EC2
       IAM Role
       Security Group (SG)
+F. Notes of SGs and NACLs
+G. NAT Gateway
+
 
 
 Note:
@@ -47,8 +50,8 @@ C. Route Table (RT)
       
 4. Edit the Routes to allow access through the IGW
       Select Route Table => Routes Tab => Edit Routes => Add Routes
-      Destination: 0.0.0.0/0 // All traffic from anywhere
-      Target: Internet Gateway => Select the preferred IGW
+            Destination: 0.0.0.0/0 // All traffic from anywhere
+            Target: Internet Gateway => Select the preferred IGW
 ====================
  
         
@@ -79,7 +82,13 @@ E. EC2
                   IAM Role: Your IAM Role should have the following policies (create new Role if required)
                         SSM: AmazonEC2RoleforSSM
                         S3: AmazonS3FullAccess
-                  Advanced Details: User Data (Provide or upload startup script - optional)
+                  Advanced Details: User Data (Provide or upload startup script - optional) // See sample startup script below
+            Configure Security Group (SG)
+                  Select existing or create a new Security Group. To create a new SG
+                        Security Group Name: Enter a name
+                        Add Rule: Type - HTTP, Protocol - TCP, Port - 80, Source - My IP (restricts access to only my computer)
+                                  Type - SSH, Protocol - TCP, Port - 22, Source - My IP (restricts access to only my computer)
+            Key Pair: Use existing or generate ne Key Pair
 ==================================================
 // The sample startup script below would install an Apache server and display a sample webpage
 // Sample Startup Script - userdata.sh
@@ -101,26 +110,44 @@ sudo su -c 'cat > /var/www/httpd/index.html <<EOL
    </body>
 </html>     
 ==================================================
-            Configure Security Group (SG)
-                  Select existing or create a new Security Group. To create a new SG
-                        Security Group Name: Enter a name
-                        Add Rule: Type - HTTP, Protocol - TCP, Port - 80, Source - My IP (restricts access to only my computer)
-                                  Type - SSH, Protocol - TCP, Port - 22, Source - My IP (restricts access to only my computer)
-            Key Pair: Use existing or generate ne Key Pair
-
+            
 2. Create another Instance for a Private Subnet.
       Note: Configure Instance Details => Subnet: Ensure to select a Private Subnet
             Configure Security Group => Add Rule: Only include "SSH" type (No HTTP)
+====================
+
+                  
+F. Notes on SG and NACL
+
+Security Groups
+1. SGs can only allow things, everything else is denied
+      E.g. You can (explicitly) set/allow inbound rules for SGs i.e My IP above - every other thing is implicitly denied
+      Outbound rules are just set to 0.0.0.0/0 (allow connection to the Internet)
+2. SGs are associated with EC2 Instances
 
 
+NACL
+1. NACLs on the other hand take both allow and deny rules
+      E.g. you can block specific IPs      
+2. NACLs are associated with Subnets     
+3. NACLs take precedence over SGs
+====================
+      
 
-
-
-
-
-
-
-
+G. NAT Gateway
+// This section assumes that you have created Private EC2 Instance, which is associated with a Private Subnet
+// and that you are trying to access the Internet via the Private EC2 Instance.
+// A good case is the need to update OS packages on the Private EC2 Instance
+1. You can enable your Private EC2 Instances to connect to the Internet via the NAT Gateway
+2. Create NAT Gateway // Note: NAT Gateway do cost money
+      Console => VPC => Left Menu => NAT GAteways => Create NAT Gateway
+            Subnet: Select a public Subnet
+            Elastic IP (EIP) Allocation ID: Create New EIP
+3. You would need to edit the Private EC2 Route Table to include the NAT Gateway ID            
+      VPC => Left Menu => Route Tables => Select Private RT => Routes Tab => Edit Routes => Add Route 
+            Destination: 0.0.0.0/0
+            Target: Select the NAT Gateway
+====================            
 
 
 
