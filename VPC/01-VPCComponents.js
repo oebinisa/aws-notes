@@ -11,7 +11,7 @@ G. VPC Flowlogs
 
 
 Note:
-1. Always ensure you have your region set to us-east-1 (N. Virginia) before performing ops
+Always ensure you have your region set to N. Virginia before performing operations
 
 
 A. Create VPC
@@ -85,7 +85,7 @@ E. NAT Gateway
 
 F. VPC Endpoints
 1. VPC Endpoints are a way to access AWS services within the AWS network without going through the Internet
-   Case: Access an S3 Bucket from a PRIVATE EC2 instance
+      Case: Access an S3 Bucket from a PRIVATE EC2 instance
 2. Create VPC Endpoint
       Console => VPC => Left Menu => Endpoints => Create Endpoint
             Service Category: AWS Service
@@ -97,16 +97,19 @@ F. VPC Endpoints
 
                   
 G. VPC Flowlogs
+1. Flowlogs would track all the traffic that is going through your VPC
+2. Create a Flowlog
+      Console => VPC => Left Menu => Your VPCs => Actions => Create Flow Log
+            Filter: Accept | Reject | All[]
+            Destination: Send to CloudWatch Logs[] | Send to an S3 Bucket
+            Destination Log Group: Select Log Group // You can create onr in CloudWatch. See Note Below
+            IAM Role: Select Role // Role must have policies that gives it access to FlowLogs
+====================
 
 
-
-
-
-
-
-
-
-
+Note:
+Create CloudWatch Log Group
+      Console => CloudWatch => Left Menu => Logs => Actions => Create Log Group => Enter Log Group Name // /project/vpc-flow-logs
 
 
 
