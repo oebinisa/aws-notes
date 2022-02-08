@@ -17,7 +17,7 @@ A. EC2
                   Network: Select preferred VPC
                   Subnet: Select a (public) subnet
                   IAM Role: Your IAM Role should have the following policies (create new Role if required)
-                        SSM: AmazonEC2RoleforSSM
+                        SSM: AmazonSSMManagedInstanceCore
                         S3: AmazonS3FullAccess
                   Advanced Details: User Data (Provide or upload startup script - optional) // See sample startup script below
             Configure Security Group (SG)
