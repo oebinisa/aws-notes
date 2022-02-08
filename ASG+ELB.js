@@ -1,12 +1,10 @@
 ASG and ELB with a Target Policy
 
-A. ASG
-B. ELB
-
 Note:
 Always ensure you have your region set to N. Virginia before performing operations
 
-A. Auto Scaling Group
+Auto Scaling Group
+==================
 1. We need to create an AMI image. To do this, we would need to launch an Instance
 2. Launch an EC2 Instance
       Console => EC2 => Left Menu => Instances => Launch Instances
