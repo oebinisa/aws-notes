@@ -38,21 +38,22 @@ A. EC2
 // Sample Startup Script - userdata.sh
 #!/usr/bin/env bash
 su ec2-user
-sudo yum unstall httpd -y
+sudo yum install httpd -y
 sudo service httpd start
-sudo su -c 'cat > /var/www/httpd/index.html <<EOL
+sudo su -c "cat > /var/www/html/index.html <<EOL
 <html>
-   <head>
-      <title>Call to Arms</title>
-      <style>
-         html, body { background: #000; padding: 0; margin: 0; }
-         img { display: block; margin: 0px auto; }
-      </style>
-   </head>
-   <body>
-      <img src='https://media.giphy.com/media/10YoCxWqM3NHxK/giphy.gif' height='100%'/>
-   </body>
-</html>     
+  <head>
+    <title>Call to Arms</title>
+    <style>
+      html, body { background: #000; padding: 0; margin: 0; }
+      img { display: block; margin: 0px auto; }
+    </style>
+  </head>
+  <body>
+    <img src='https://media.giphy.com/media/10YoCxWqM3NHxK/giphy.gif' height='100%'/>
+  </body>
+</html>
+EOL"
 ==================================================
 ====================
 
