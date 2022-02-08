@@ -40,8 +40,14 @@ A. Auto Scaling Group
                   Amazon Machine Image (AMI): Select the AMI we created above (MyAmi000)
                   Instance Type: t2.micro
                   Key Pair: We do not need a Key Pair. We would use Sessions Manager to login
+                  Network Settings:
+                        Networking Platform:
+                              VPC []
+                              EC2-Classic
+                        Security Groups Info: Select your Security Group (my-server-sg)                          
                   IAM Instance Profile: Select the IAM Role created above (MyServerRole)
-            Launch Template: Refresh the field and select the template we created above (MyLaunchTemplate)
+            Launch Template: // Welcome back!
+                  Refresh the field and select the template we created above (MyLaunchTemplate) 
             Configure Settings: 
                   Purchase Options and Instance Types: You "Adhere to Launch Template" [] or "Combine or add additional server options"
                   VPC: Select your default VPC
@@ -51,12 +57,52 @@ A. Auto Scaling Group
                         Enable Load Balancing [check]:
                               ALB or NLB
                         Create a Target Group // Right-click to do this in a new Tab so that you can easily come back to this
-            
-
-
-
+                              Left Menu => Load Balancing => Load Balancers => Create Load Balancer
+                                    Select a Load Balancer:
+                                          Application Load Balancer (ALB) [] // Select this
+                                          Network Load Balancer (NLB)
+                                          Classic Load Balancer (CLB)
+                                    Select ALB:
+                                          Basic Configuration:
+                                                Name: Enter a name for load balancer (MyELB)
+                                                Scheme: Internet Facing
+                                                Listeners: HTTP, Port 80
+                                                Availabilty Zones:
+                                                      Select the 3 zones matching the Auto Scaling Group // Super important!
+                                          COnfigure Security Settings: (default)
+                                          Configure Security Groups: Select SG created above (my-server-sg)
+                                          Configure Routing:
+                                                Target Group: 
+                                                      Target Group: New Target Group
+                                                      Name: Enter a name for Target Group (MyTargetGroup)
+                                                      Target Type: Instance
+                                                      Prorocol: HTTP
+                                                      Port: 80
+                                                Health Checks:
+                                                      Protocol: HTTP
+                                                      Path: / (This will return true if the homepage loads)
+                                                      Advanced Health Check Settings: 
+                                                            Port: Traffic Port
+                                                            Health Check Threshold: 5 // It would check 5 times
+                                                            Unhealthy Threshold: 2 // Returns FALSE if the app doesn't load after 2 tests
+                        Create a Target Group // Welcome back! 
+                              Click on the Refresh icon to load the newly crreated Target Group
+                              Select your Target Group (MyTargetGroup)                                    
+                  Health Checks:
+                        EC2: This would check and return true if the server is running
+                        ELB: Goes a step further. Returns true if the application on the server is running []
+            Configure Group Size and Scaling Policies:
+                  Group Size:
+                        Desired Capacity: 1
+                        Minimum Capacity: 1 // Always at least one server running
+                        Maximum Capacity: 1
+                  Scaling Policies: // Choose whether to use a scaling policy to dynamically resize your Auto Scaling Group to meet changes in demand
+                        None []
+                        Target Tracking Scaling Policy 
                         
                         
+EOF          
+                  
 ==================================================
 // The sample startup script below would install an Apache server and display a sample webpage
 // Sample Startup Script - userdata.sh
