@@ -36,7 +36,7 @@ A. EC2
 ==================================================
 // The sample startup script below would install an Apache server and display a sample webpage
 // Sample Startup Script - userdata.sh
---
+#!/usr/bin/env bash
 su ec2-user
 sudo yum unstall httpd -y
 sudo service httpd start
