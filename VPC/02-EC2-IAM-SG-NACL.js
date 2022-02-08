@@ -1,5 +1,8 @@
 EC2 
 
+Note:
+Always ensure you have your region set to N. Virginia before performing operations
+
 A. EC2 
       Create EC2
       IAM Role
