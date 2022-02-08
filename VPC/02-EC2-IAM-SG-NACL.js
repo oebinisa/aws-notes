@@ -34,8 +34,8 @@ A. EC2
       Note: Configure Instance Details => Subnet: Ensure to select a Private Subnet
             Configure Security Group => Add Rule: Only include "SSH" type (No HTTP)
 ==================================================
-// The sample startup script below would install an Apache server and display a sample webpage
-// Sample Startup Script - userdata.sh
+// The sample startup script below would install an Apache server and display a sample webpage (Public EC2 Instance)
+// Sample Startup Script - public.userdata.sh
 #!/usr/bin/env bash
 su ec2-user
 sudo yum install httpd -y
@@ -55,6 +55,14 @@ sudo su -c "cat > /var/www/html/index.html <<EOL
 </html>
 EOL"
 ==================================================
+// The sample startup script (Private EC2 Instance)
+// Sample Startup Script - private.userdata.sh
+#!/usr/bin/env bash
+su ec2-user
+echo -e "kaiwinn\nkaiwinn" | passwd ec2-user
+sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo service sshd restart
+==================================================      
 ====================
 
                   
