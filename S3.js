@@ -108,15 +108,15 @@ G. S3 Cross-Region Replication
 
 H. Bucket Policy
 ================
+1. This would control access to the Bucket
+2. Create Bucket Policy (JSON)
+      Bucket Page => Permissions => Bucket Policy => Policy Generator (in New Tab)
+            Select Type of Policy: S3 Bucket Policy
+            ...
+            ...
+            Generate Policy Button =>Copy the JSON code
+      Back to Bucket Policy => Paste JSON Code from Policy Generator => Save
 
 
-
-
-
-
-
-
-
-
-
-
+EOF
+   
