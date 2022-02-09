@@ -1,5 +1,15 @@
 S3
 ==
+      
+A. Create and Delete a Bucket
+B. Private and Public Access
+C. Versioning
+D. Encryption
+E. S3 CLI
+F. Lifecycle Rules/Policies
+G. S3 Cross-Region Replication
+H. Bucket Policy
+
 
 Notes:
 1. S3 is in a Global region unlike most of other AWS services (N. Virginia, Ohio etc.)
@@ -68,17 +78,36 @@ E. S3 CLI
    The command will generate a URL, which can be used to temporarily access the file
 
 
-F. Lifecycle Rule
-=================
+F. Lifecycle Rules/Policies
+===========================
 1. There are 7 Storage Classes available for storing objects in AWS S3. They come in different prices and availabilities
-        Standard (Default), Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier, Glacier Deep Archive, and Reduced Redundancy (Not Recommended)
-2. Storage classes can only be applied at Objects level
+      Standard (Default), Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier, Glacier Deep Archive, and Reduced Redundancy (Not Recommended)
+2. Storage classes can only be applied at Objects level // Not at Bucket level
+3. Set Object Storage Class: Individually
+      Select Object => Properties => Storage Class => Select Staorage Class
+      
+4. Set Object Storage Class: Bulk (Automate)
+      Bucket Page => Management Tab => Lifecycle => Add Lifecycle Rule
+            Rule Name: Enter a Rule Name (My30DayRule)
+            Choose Storage Class: Current Version
+                  Transition: Select preferred Transition (Transition to Standard-IA)
+                  Days after Creation: 30 Days // Minimum value allowed
+          
 
+G. S3 Cross-Region Replication
+==============================
+1. This covers replicating a Bucket's content to another Bucket, which could be in another Region
+2. Ensure you have versioning turned ON in both Source and Destination Buckets
+3. Set Cross-Region Replication
+      Bucket Page => Management Tab => Replication => Add Rule 
+            You can change Storage Class for the Destination Bucket to save money (Standar-IA)
+            You can also change Bucket Ownership in Destination to Destination Bucket's Owner
+            IAM Role
+            Enter Rule Name (S3 Access Policy)
+ 
 
-
-
-
-
+H. Bucket Policy
+================
 
 
 
