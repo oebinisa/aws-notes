@@ -1,18 +1,36 @@
 Elastic Beanstalk Walkthrough
 
+Note:
+Always ensure you are in the N. Virginia region (us-east-1) before executing the below 
 
 //Start with Cloud9
 A. Setup Cloud9 environment
-1. New EC2, t2.micro, Amazon Linux 2, 30 mins, IAM role
-2. Linux: Use Vim commands
-3. Make a directory to house your project (project_name = study-sync)
+1. Console => Cloud9 => Create Environment 
+     Name: Enter a name for your environment (DevEnv)
+     Description: (optional)
+
+2. Configure Settings:
+     Environment Settings: EC2
+     Instance Type: t2.micro
+     Platform: Amazon Linux 2
+     Cost-saving Setting: 30 minutes
+     IAM Role: AWSServiceRoleForAWSCloud9 // Create this if not automatically available/created
+          Policies: AWSCloud9ServiceRolePolicy
+          
+   Create Environment Button          
+
+3. Configure AWS Cloud9 // Optional
+     Main Theme: Dark Theme
+     Editor Theme: Night Low-light Color
+     Keyboard Mode: Vim
+          
+4. Make a directory to house your project (project_name = study-sync)
      mkdir ~/environment/study-sync
 
-4. CD into the folder and initiate a project
-    cd study-sync
-    npm init -y
+5. CD into the folder and initiate a project
+     cd study-sync
+     npm init -y // This creates a package.json file for the project that we can adjust as needed
 
-5. The above creates a package.json file for the project that we can adjust as needed
 6. Below is a sample content of package.json
     {
       "name": "study-sync",
@@ -28,10 +46,12 @@ A. Setup Cloud9 environment
     }
 
 7. We need a framework for our web app. Let's run express
-    npm i express --save
+     npm i express --save
+     
 8. Create initial files needed for the project (4 files)
 9. They are (1) index.js (2) index.html (3) app.js, and (4) style.css
-    touch index.js index.html app.js style.css
+     touch index.js index.html app.js style.css
+
 10. Edit the script so that the program can run. Insert the following script after line 6
     ...
     "scripts": {
