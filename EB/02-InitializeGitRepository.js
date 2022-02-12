@@ -11,7 +11,7 @@ B. Initialize Git Repository
 3. Create the .gitignore file
       touch .gitignore
 
-4. Open the newly created file and type in node_module. This would ignore the entire node_modules folder
+4. Open the newly created file and type in node_modules. This would ignore the entire node_modules folder
       c9 .gitignore
 
 5. Next, set up the git repo. The command would create a .git directory
